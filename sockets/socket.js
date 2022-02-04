@@ -20,7 +20,6 @@ io.on('connection', client => {
 
 client.on('mensaje',(payload)=>{
     console.log('mensaje', payload);
-
     io.emit('mensaje', {admin:'Nuevo mate'});
 });
 
@@ -32,7 +31,6 @@ client.on('mensaje',(payload)=>{
   client.on('vote-band',(payload) => {
       bands.voteBand(payload.id);
       io.emit('bandas-activas',bands.getBands());
-  
 } );
 
 
@@ -44,7 +42,6 @@ client.on('add-band',(payload) => {
 } );
 
 client.on('delete-band',(payload) => {
-    
     bands.deleteBand(payload.id);
     io.emit('bandas-activas',bands.getBands());
 
