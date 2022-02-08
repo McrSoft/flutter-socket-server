@@ -2,8 +2,16 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config();
 
+//db config
+const { dbConnection } = require('./database/config');
+dbConnection();
+
 //app de express 
 const app = express();
+
+//lectura y parseo del body
+app.use( express.json() );
+
 
 //node server
 const server = require('http').createServer(app);
@@ -16,6 +24,9 @@ require('./sockets/socket');
 const publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
+
+// mis rutas
+app.use( '/api/login', require('./routes/auth'));
 
 server.listen(process.env.PORT, (err)=> {
 
